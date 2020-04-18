@@ -3,6 +3,8 @@ package io.slavisdev.zpi.di.base
 import io.slavisdev.zpi.di.ui.main.MainActivityComponent
 import io.slavisdev.zpi.di.ui.main.MainActivityModule
 import dagger.Component
+import io.slavisdev.zpi.di.ui.auth.AuthActivityComponent
+import io.slavisdev.zpi.di.ui.auth.AuthActivityModule
 import io.slavisdev.zpi.di.ui.auth.forget_password.ForgetPasswordFragmentComponent
 import io.slavisdev.zpi.di.ui.auth.forget_password.ForgetPasswordFragmentModule
 import io.slavisdev.zpi.di.ui.auth.login.LoginFragmentComponent
@@ -26,6 +28,8 @@ interface AppComponent {
     fun plus(module: MainActivityModule): MainActivityComponent
 
     fun plus(module: SplashScreenActivityModule): SplashScreenActivityComponent
+
+    fun plus(module: AuthActivityModule): AuthActivityComponent
 
     fun plus(module: LoginFragmentModule): LoginFragmentComponent
 

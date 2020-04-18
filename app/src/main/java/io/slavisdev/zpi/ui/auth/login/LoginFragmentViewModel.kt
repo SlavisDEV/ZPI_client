@@ -5,7 +5,15 @@
 
 package io.slavisdev.zpi.ui.auth.login
 
+import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
 
 class LoginFragmentViewModel @Inject constructor() {
+
+    val email = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
+
+    fun login() {
+
+    }
 }

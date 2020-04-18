@@ -72,6 +72,9 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui:2.2.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.2.1"
 
+    // material design
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
+
     // circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
