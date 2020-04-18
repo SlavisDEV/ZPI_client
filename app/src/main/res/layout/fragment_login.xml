@@ -41,8 +41,7 @@
             android:theme="@style/InputTextLayout"
             app:boxBackgroundMode="outline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="349dp">
+            app:layout_constraintStart_toStartOf="parent">
 
             <EditText
                 style="@style/EditTextStyle"

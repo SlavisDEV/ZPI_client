@@ -9,4 +9,8 @@
     <string name="login">Login</string>
     <string name="do_not_have_an_account">Do not have an account?</string>
     <string name="do_not_remember_password">Do not remember password?</string>
+    <string name="reset_your_password">Reset your password</string>
+    <string name="rest">Reset</string>
+    <string name="register">Register</string>
+    <string name="create_account">Create account</string>
 </resources>

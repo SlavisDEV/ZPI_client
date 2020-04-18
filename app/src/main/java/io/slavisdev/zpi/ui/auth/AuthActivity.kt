@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import io.slavisdev.zpi.R
 import io.slavisdev.zpi.databinding.ActivityAuthBinding
 import io.slavisdev.zpi.di.base.App
@@ -18,8 +21,8 @@ class AuthActivity : AppCompatActivity(), AuthActivityViewAccess {
 
     private lateinit var binding: ActivityAuthBinding
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         App.get(this)
             .getAppComponent()
@@ -33,11 +36,21 @@ class AuthActivity : AppCompatActivity(), AuthActivityViewAccess {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(
+            findNavController(
+                this,
+                R.id.auth_hostFragment
+            ),
+            null
+        )
+    }
+
     override fun showRegisterScreen() {
-        TODO("Not yet implemented")
+        navigation.showRegisterFragment(this)
     }
 
     override fun showForgetPasswordScreen() {
-        TODO("Not yet implemented")
+        navigation.showForgotPasswordFragment(this)
     }
 }

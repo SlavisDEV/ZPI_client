@@ -2,6 +2,7 @@ package io.slavisdev.zpi.ui.splash_screen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import io.slavisdev.zpi.R
 import io.slavisdev.zpi.di.base.App
 import io.slavisdev.zpi.di.ui.splash_screen.SplashScreenActivityModule
 import io.slavisdev.zpi.navigation.Navigation
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 private const val SPLASH_SCREEN_TIME = 1500L
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity(R.layout.activity_splash_screen) {
 
     @Inject
     protected lateinit var navigation: Navigation

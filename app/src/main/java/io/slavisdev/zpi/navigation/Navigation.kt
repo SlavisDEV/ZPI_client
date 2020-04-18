@@ -5,7 +5,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
+import io.slavisdev.zpi.R
 import io.slavisdev.zpi.ui.auth.AuthActivity
+import io.slavisdev.zpi.ui.auth.login.LoginFragmentDirections
+import kotlinx.android.synthetic.main.activity_auth.*
 
 class Navigation {
 
@@ -14,8 +18,14 @@ class Navigation {
         activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
-    fun showForgotPasswordFragment(supportFragmentManager: FragmentManager, containerId: Int) {
+    fun showForgotPasswordFragment(activity: AuthActivity) {
+        val action = LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment()
+        Navigation.findNavController(activity, R.id.auth_hostFragment).navigate(action)
+    }
 
+    fun showRegisterFragment(activity: AuthActivity) {
+        val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+        Navigation.findNavController(activity, R.id.auth_hostFragment).navigate(action)
     }
 
     fun startAuthActivityAfterLogout(context: Context) {
