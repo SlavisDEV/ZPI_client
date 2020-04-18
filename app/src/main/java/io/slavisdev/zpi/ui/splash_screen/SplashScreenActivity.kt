@@ -2,7 +2,6 @@ package io.slavisdev.zpi.ui.splash_screen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import io.slavisdev.zpi.R
 import io.slavisdev.zpi.di.base.App
 import io.slavisdev.zpi.di.ui.splash_screen.SplashScreenActivityModule
 import io.slavisdev.zpi.navigation.Navigation
@@ -41,7 +40,7 @@ class SplashScreenActivity : AppCompatActivity() {
             if (isUserLoggedIn) {
                 navigation.startMainActivity(this@SplashScreenActivity)
             } else {
-                navigation.startLoginActivity(this@SplashScreenActivity)
+                navigation.startAuthActivity(this@SplashScreenActivity)
             }
             finish()
         }
