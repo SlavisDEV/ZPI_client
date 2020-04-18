@@ -7,11 +7,11 @@
     <data>
         <variable
             name="model"
-            type="com.softroids.emptyproject.ui.main.MainActivityViewModel" />
+            type="io.slavisdev.zpi.ui.main.MainActivityViewModel" />
 
         <variable
             name="viewAccess"
-            type="com.softroids.emptyproject.ui.main.MainActivityViewAccess" />
+            type="io.slavisdev.zpi.ui.main.MainActivityViewAccess" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
