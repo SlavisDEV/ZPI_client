@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 private const val SPLASH_SCREEN_TIME = 1500L
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity(R.layout.activity_splash_screen) {
 
     @Inject
     protected lateinit var navigation: Navigation
@@ -41,7 +41,7 @@ class SplashScreenActivity : AppCompatActivity() {
             if (isUserLoggedIn) {
                 navigation.startMainActivity(this@SplashScreenActivity)
             } else {
-                navigation.startLoginActivity(this@SplashScreenActivity)
+                navigation.startAuthActivity(this@SplashScreenActivity)
             }
             finish()
         }
