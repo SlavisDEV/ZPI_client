@@ -6,4 +6,8 @@
 package io.slavisdev.zpi.ui.auth.login
 
 interface LoginFragmentViewAccess {
+
+    fun showRegisterScreen()
+    fun showForgetPasswordScreen()
+
 }

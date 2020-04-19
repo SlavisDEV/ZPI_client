@@ -17,6 +17,7 @@ import io.slavisdev.zpi.databinding.FragmentLoginBinding
 import io.slavisdev.zpi.di.base.App
 import io.slavisdev.zpi.di.ui.auth.login.LoginFragmentModule
 import io.slavisdev.zpi.navigation.Navigation
+import io.slavisdev.zpi.ui.auth.AuthActivity
 import io.slavisdev.zpi.ui.base.ScopedFragment
 import javax.inject.Inject
 
@@ -53,5 +54,13 @@ class LoginFragment : ScopedFragment(), LoginFragmentViewAccess {
         }
 
         return binding.root
+    }
+
+    override fun showRegisterScreen() {
+        navigation.showRegisterFragment(activity as AuthActivity)
+    }
+
+    override fun showForgetPasswordScreen() {
+        navigation.showForgotPasswordFragment(activity as AuthActivity)
     }
 }
