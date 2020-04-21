@@ -19,4 +19,5 @@
     <string name="error">Error</string>
     <string name="api_error">Occurred api error. Try again letter</string>
     <string name="account_has_been_created">Your account has been created</string>
+    <string name="wrong_credentials">Wrong credentials</string>
 </resources>

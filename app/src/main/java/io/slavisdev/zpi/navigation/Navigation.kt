@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import io.slavisdev.zpi.R
 import io.slavisdev.zpi.ui.auth.AuthActivity
 import io.slavisdev.zpi.ui.auth.login.LoginFragmentDirections
+import io.slavisdev.zpi.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_auth.*
 
 class Navigation {
@@ -37,6 +38,7 @@ class Navigation {
     }
 
     fun startMainActivity(activity: Activity) {
-
+        activity.startActivity(Intent(activity, MainActivity::class.java))
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 }

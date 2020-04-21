@@ -9,5 +9,6 @@ interface LoginFragmentViewAccess {
 
     fun showRegisterScreen()
     fun showForgetPasswordScreen()
+    fun showMainActivity()
 
 }
