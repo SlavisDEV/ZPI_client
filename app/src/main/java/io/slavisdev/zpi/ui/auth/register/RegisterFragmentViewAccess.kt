@@ -5,5 +5,4 @@
 
 package io.slavisdev.zpi.ui.auth.register
 
-interface RegisterFragmentViewAccess {
-}
+interface RegisterFragmentViewAccess

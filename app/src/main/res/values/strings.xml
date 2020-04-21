@@ -13,4 +13,10 @@
     <string name="rest">Reset</string>
     <string name="register">Register</string>
     <string name="create_account">Create account</string>
+    <string name="understand">Rozumiem</string>
+    <string name="success">Success</string>
+    <string name="password_has_been_reset">Password has been reset. Check your e-mail</string>
+    <string name="error">Error</string>
+    <string name="api_error">Occurred api error. Try again letter</string>
+    <string name="account_has_been_created">Your account has been created</string>
 </resources>

@@ -5,5 +5,4 @@
 
 package io.slavisdev.zpi.ui.auth.forget_password
 
-interface ForgetPasswordFragmentViewAccess {
-}
+interface ForgetPasswordFragmentViewAccess

@@ -11,12 +11,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 
 import io.slavisdev.zpi.R
 import io.slavisdev.zpi.databinding.FragmentRegisterBinding
 import io.slavisdev.zpi.di.base.App
 import io.slavisdev.zpi.di.ui.auth.register.RegisterFragmentModule
+import io.slavisdev.zpi.ui.base.InfoDialog
 import io.slavisdev.zpi.ui.base.ScopedFragment
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RegisterFragment : ScopedFragment(), RegisterFragmentViewAccess {
@@ -48,7 +51,33 @@ class RegisterFragment : ScopedFragment(), RegisterFragmentViewAccess {
             viewAccess = this@RegisterFragment
         }
 
+        bindInfoUI()
+
         return binding.root
+    }
+
+    private fun bindInfoUI() = launch {
+
+        model.showInfoModal.observe(this@RegisterFragment, Observer {
+            if (it == null) return@Observer
+
+            if (it == true) {
+                val title = model.infoTitle.value ?: return@Observer
+                val message = model.infoMessage.value ?: return@Observer
+                showInfoModal(title, message)
+            }
+        })
+    }
+
+    private fun showInfoModal(title: Int, message: Int) {
+        InfoDialog(context!!, R.layout.modal_info).apply {
+            setTitle(title)
+            setMessage(message)
+            setButtonAction {
+                model.clearFields()
+            }
+            show()
+        }
     }
 
 }
