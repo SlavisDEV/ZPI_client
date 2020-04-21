@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Sławomir Przybylski
+  ~ 21/04/20 13:08
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
+    app:startDestination="@id/yourMenuFragment">
+
+    <fragment
+        android:id="@+id/yourMenuFragment"
+        android:name="io.slavisdev.zpi.ui.main.your_menu.YourMenuFragment"
+        android:label="YourMenuFragment" />
+    <fragment
+        android:id="@+id/browseRecipesFragment"
+        android:name="io.slavisdev.zpi.ui.main.browse_recipes.BrowseRecipesFragment"
+        android:label="BrowseRecipesFragment" />
+    <fragment
+        android:id="@+id/favouriteRecipesFragment"
+        android:name="io.slavisdev.zpi.ui.main.favourite_recipes.FavouriteRecipesFragment"
+        android:label="FavouriteRecipesFragment" />
+</navigation>

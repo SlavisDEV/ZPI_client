@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Sławomir Przybylski
+  ~ 21/04/20 13:10
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_menu_your_menu"
+        android:title="@string/your_menu"
+        android:icon="@drawable/ic_your_menu"/>
+    <item
+        android:id="@+id/main_menu_browse_recipes"
+        android:title="@string/browse_recipes"
+        android:icon="@drawable/ic_browse_recipes"/>
+    <item
+        android:id="@+id/main_menu_favourite_recipes"
+        android:title="@string/favourite_recipes"
+        android:icon="@drawable/ic_heart"/>
+</menu>
