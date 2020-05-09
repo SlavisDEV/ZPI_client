@@ -23,4 +23,9 @@
     <string name="your_menu">your menu</string>
     <string name="browse_recipes">browse recipes</string>
     <string name="favourite_recipes">favourite recipes</string>
+    <string name="favourite">favourite</string>
+    <string name="your_menu_title">Hello! What do you want to eat?</string>
+    <string name="i_do_not_like">I do not like…</string>
+    <string name="avoid_ingredients">Avoid these ingredients</string>
+    <string name="your_menu_upper">Your menu</string>
 </resources>

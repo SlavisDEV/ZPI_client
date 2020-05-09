@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Sławomir Przybylski
+  ~ 02/05/20 21:03
+  -->
+
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <nine-patch android:src="@drawable/shadow"/>
+    </item>
+    <item
+        android:right="-8dp"
+        android:top="-4dp"
+        android:left="-8dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white"/>
+            <corners
+                android:bottomLeftRadius="24dp"
+                android:bottomRightRadius="24dp"/>
+        </shape>
+    </item>
+</layer-list>
