@@ -8,6 +8,9 @@ package io.slavisdev.zpi.ui.auth.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.slavisdev.zpi.R
+import io.slavisdev.zpi.data.TokenModel
+import io.slavisdev.zpi.net.Api
+import io.slavisdev.zpi.settings.AppSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +21,12 @@ class LoginFragmentViewModel @Inject constructor() {
 
     @Inject
     protected lateinit var viewAccess: LoginFragmentViewAccess
+
+    @Inject
+    protected lateinit var appSettings: AppSettings
+
+    @Inject
+    protected lateinit var api: Api
 
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
@@ -33,37 +42,39 @@ class LoginFragmentViewModel @Inject constructor() {
         get() = _showInfoModal
 
     fun login() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = loginUserApiRequest()
-            when(result) {
-                1 -> viewAccess.showMainActivity()
-                2 -> {
-                    _infoTitle.postValue(R.string.error)
-                    _infoMessage.postValue(R.string.wrong_credentials)
-                    _showInfoModal.postValue(true)
-                }
-                3 -> {
+        if (validateFields()) {
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = loginUserApiRequest()
+                if (result != null) {
+                    appSettings.saveAccessToken(result.token)
+                    viewAccess.showMainActivity()
+                } else {
                     _infoTitle.postValue(R.string.error)
                     _infoMessage.postValue(R.string.api_error)
                     _showInfoModal.postValue(true)
                 }
             }
+        } else {
+            _infoTitle.value = R.string.error
+            _infoMessage.value = R.string.wrong_credentials
+            _showInfoModal.value = true
         }
     }
 
-    /**
-     * return
-     * 1 - success
-     * 2 - wrong credentials
-     * 3 - api error
-     */
-    private suspend fun loginUserApiRequest(): Int {
+    private fun validateFields(): Boolean {
+        return !(email.value.isNullOrBlank() || password.value.isNullOrBlank())
+    }
+
+
+    private suspend fun loginUserApiRequest(): TokenModel? {
         return withContext(Dispatchers.IO) {
             try {
-                // todo reset password
-                1
+                api.getToken(
+                    email.value ?: "",
+                    password.value ?: ""
+                ).await()
             } catch (throwable: Throwable) {
-                2
+                null
             }
         }
     }

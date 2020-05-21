@@ -1,0 +1,10 @@
+query RecipesQuery {
+    allRecipes {
+        title,
+        imageSet {
+            url
+        },
+        description,
+        preparationTime
+    }
+}

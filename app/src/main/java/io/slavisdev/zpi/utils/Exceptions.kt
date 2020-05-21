@@ -1,5 +1,5 @@
 package io.slavisdev.zpi.utils
 
-import java.lang.Exception
+import java.io.IOException
 
-class NoConnectivityException : Exception()
+class NoConnectivityException : IOException()

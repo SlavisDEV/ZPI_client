@@ -64,20 +64,10 @@ class RegisterFragment : ScopedFragment(), RegisterFragmentViewAccess {
             if (it == true) {
                 val title = model.infoTitle.value ?: return@Observer
                 val message = model.infoMessage.value ?: return@Observer
-                showInfoModal(title, message)
+                showInfoModal(title, message) {
+                    model.clearFields()
+                }
             }
         })
     }
-
-    private fun showInfoModal(title: Int, message: Int) {
-        InfoDialog(context!!, R.layout.modal_info).apply {
-            setTitle(title)
-            setMessage(message)
-            setButtonAction {
-                model.clearFields()
-            }
-            show()
-        }
-    }
-
 }

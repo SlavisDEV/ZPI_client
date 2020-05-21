@@ -16,7 +16,14 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.Constraints
 import io.slavisdev.zpi.R
 
-class InfoDialog(context: Context, themeId: Int) : Dialog(context, themeId) {
+class InfoDialog(
+    context: Context,
+    private val themeId: Int,
+    private val title: Int,
+    private val message: Int,
+    private val action: () -> Unit
+) : Dialog(context, themeId) {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,19 +33,22 @@ class InfoDialog(context: Context, themeId: Int) : Dialog(context, themeId) {
             Constraints.LayoutParams.MATCH_PARENT,
             Constraints.LayoutParams.WRAP_CONTENT
         )
+        setContentView(themeId)
 
-        setButtonAction {  }
+        setInfoTitle(title)
+        setMessage(message)
+        setButtonAction(action)
     }
 
-    override fun setTitle(title: Int) {
+    private fun setInfoTitle(title: Int) {
         findViewById<TextView>(R.id.textView_title).setText(title)
     }
 
-    fun setMessage(message: Int) {
+    private fun setMessage(message: Int) {
         findViewById<TextView>(R.id.textView_message).setText(message)
     }
 
-    fun setButtonAction(action: () -> Unit) {
+    private fun setButtonAction(action: () -> Unit) {
         findViewById<Button>(R.id.button_understand).setOnClickListener {
             action()
             dismiss()

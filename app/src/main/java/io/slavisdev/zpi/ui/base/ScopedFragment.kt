@@ -7,6 +7,7 @@ package io.slavisdev.zpi.ui.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import io.slavisdev.zpi.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,5 +27,16 @@ abstract class ScopedFragment : Fragment(), CoroutineScope {
     override fun onDestroy() {
         super.onDestroy()
         job.cancel()
+    }
+
+    protected fun showInfoModal(title: Int, message: Int, action: () -> Unit) {
+        InfoDialog(
+            requireContext(),
+            R.layout.modal_info,
+            title,
+            message
+        ) {
+            action()
+        }.show()
     }
 }

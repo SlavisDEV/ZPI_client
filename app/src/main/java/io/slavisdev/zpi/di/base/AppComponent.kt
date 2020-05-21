@@ -23,6 +23,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AppSettingsModule::class,
+        ApiModule::class,
         AppModule::class,
         NavigationModule::class
     ]
