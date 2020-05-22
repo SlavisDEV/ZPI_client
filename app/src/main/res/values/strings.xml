@@ -28,4 +28,5 @@
     <string name="i_do_not_like">I do not like…</string>
     <string name="avoid_ingredients">Avoid these ingredients</string>
     <string name="your_menu_upper">Your menu</string>
+    <string name="unknown">Unknown</string>
 </resources>

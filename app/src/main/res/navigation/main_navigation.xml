@@ -6,18 +6,18 @@
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
-    app:startDestination="@id/yourMenuFragment">
+    app:startDestination="@id/main_menu_your_menu">
 
     <fragment
-        android:id="@+id/yourMenuFragment"
+        android:id="@+id/main_menu_your_menu"
         android:name="io.slavisdev.zpi.ui.main.your_menu.YourMenuFragment"
         android:label="YourMenuFragment" />
     <fragment
-        android:id="@+id/browseRecipesFragment"
+        android:id="@+id/main_menu_browse_recipes"
         android:name="io.slavisdev.zpi.ui.main.browse_recipes.BrowseRecipesFragment"
         android:label="BrowseRecipesFragment" />
     <fragment
-        android:id="@+id/favouriteRecipesFragment"
+        android:id="@+id/main_menu_favourite_recipes"
         android:name="io.slavisdev.zpi.ui.main.favourite_recipes.FavouriteRecipesFragment"
         android:label="FavouriteRecipesFragment" />
 </navigation>

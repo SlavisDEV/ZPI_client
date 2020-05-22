@@ -89,7 +89,7 @@ class BrowseRecipesFragment : ScopedFragment(), BrowseRecipesFragmentViewAccess 
         model.recipes.observe(this@BrowseRecipesFragment, Observer {
             if (it == null) return@Observer
 
-            val recipes = it.filterNotNull()
+            val recipes = it
             val adapter = RecipesAdapter(recipes, model)
             binding.recipesRecyclerView.adapter = adapter
         })

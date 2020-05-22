@@ -47,6 +47,7 @@ class LoginFragmentViewModel @Inject constructor() {
                 val result = loginUserApiRequest()
                 if (result != null) {
                     appSettings.saveAccessToken(result.token)
+                    appSettings.saveUserLoggedIn(true)
                     viewAccess.showMainActivity()
                 } else {
                     _infoTitle.postValue(R.string.error)

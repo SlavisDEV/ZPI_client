@@ -22,14 +22,12 @@ fun setImageFromResource(view: ImageView, resource: Int) {
 }
 
 @BindingAdapter("imageFromUri")
-fun setImageFromUri(view: ImageView, uri: Uri?) {
-    if (uri == null) {
+fun setImageFromUrl(view: ImageView, url: String?) {
+    if (url == null) {
         return
     }
-    val filePath = uri.path ?: return
-    val file = File(filePath)
 
     Glide.with(view)
-        .load(file)
+        .load(url)
         .into(view)
 }

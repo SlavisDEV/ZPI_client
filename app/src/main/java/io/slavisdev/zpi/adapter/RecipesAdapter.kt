@@ -8,10 +8,11 @@ package io.slavisdev.zpi.adapter
 import com.softroids.profracht.adapter.BaseLayoutAdapter
 import io.slavisdev.zpi.R
 import io.slavisdev.zpi.RecipesQuery
+import io.slavisdev.zpi.data.RecipeModel
 import io.slavisdev.zpi.ui.main.browse_recipes.BrowseRecipesFragmentViewModel
 
 class RecipesAdapter(
-    private val recipes: List<RecipesQuery.AllRecipe>,
+    private val recipes: List<RecipeModel>,
     access: BrowseRecipesFragmentViewModel
 ) : BaseLayoutAdapter(R.layout.item_recipe, access) {
 

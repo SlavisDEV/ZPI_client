@@ -5,6 +5,7 @@ query RecipesQuery {
             url
         },
         description,
-        preparationTime
+        preparationTime,
+        servings
     }
 }

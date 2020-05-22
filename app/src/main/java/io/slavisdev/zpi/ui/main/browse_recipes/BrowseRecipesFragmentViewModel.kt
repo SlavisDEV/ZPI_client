@@ -5,6 +5,7 @@
 
 package io.slavisdev.zpi.ui.main.browse_recipes
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloCall
@@ -14,16 +15,17 @@ import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import io.slavisdev.zpi.R
 import io.slavisdev.zpi.RecipesQuery
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import io.slavisdev.zpi.data.RecipeModel
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class BrowseRecipesFragmentViewModel @Inject constructor() {
 
     @Inject
     protected lateinit var apolloClient: ApolloClient
+
+    @Inject
+    protected lateinit var context: Context
 
     private val _infoTitle = MutableLiveData<Int>()
     val infoTitle: LiveData<Int>
@@ -35,11 +37,16 @@ class BrowseRecipesFragmentViewModel @Inject constructor() {
     val showInfoModal: LiveData<Boolean>
         get() = _showInfoModal
 
-    private val _recipes = MutableLiveData<List<RecipesQuery.AllRecipe?>>()
-    val recipes: LiveData<List<RecipesQuery.AllRecipe?>>
+    private val _recipes = MutableLiveData<List<RecipeModel>>()
+    val recipes: LiveData<List<RecipeModel>>
         get() = _recipes
 
+    private val _executeRequest = MutableLiveData<Boolean>()
+    val executeRequest: LiveData<Boolean>
+        get() = _executeRequest
+
     fun setup() {
+        _executeRequest.value = true
         CoroutineScope(Dispatchers.IO).launch {
             val apolloResponse = fetchRecipes()
 
@@ -48,14 +55,29 @@ class BrowseRecipesFragmentViewModel @Inject constructor() {
                 _infoMessage.postValue(R.string.api_error)
                 _showInfoModal.postValue(true)
             } else {
-                _recipes.postValue(apolloResponse.allRecipes())
+                _recipes.postValue(apolloResponse.allRecipes()?.map {
+                    RecipeModel(
+                        it.title() ?: context.getString(R.string.unknown),
+                        it.description() ?: context.getString(R.string.unknown),
+                        it.preparationTime()?.toString() ?: context.getString(R.string.unknown),
+                        it.servings() ?: context.getString(R.string.unknown),
+                        it.imageSet().firstOrNull()?.url()
+                    )
+                })
+
+                delay(1500)
+                _executeRequest.postValue(false)
             }
         }
     }
 
     private suspend fun fetchRecipes() : RecipesQuery.Data? {
         return withContext(Dispatchers.IO) {
-            apolloClient.query(RecipesQuery()).toDeferred().await().data
+            try {
+                apolloClient.query(RecipesQuery()).toDeferred().await().data
+            } catch (throwable: Throwable) {
+                null
+            }
         }
     }
 }

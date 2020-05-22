@@ -502,6 +502,18 @@
               "deprecationReason": null
             },
             {
+              "name": "servings",
+              "description": "",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "url",
               "description": "",
               "args": [],
