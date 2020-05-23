@@ -55,4 +55,12 @@ class MainActivity : AppCompatActivity(),
             null
         )
     }
+
+    fun showLoadingScreen() {
+        model.showLoadingScreen()
+    }
+
+    fun hideLoadingScreen() {
+        model.hideLoadingScreen()
+    }
 }

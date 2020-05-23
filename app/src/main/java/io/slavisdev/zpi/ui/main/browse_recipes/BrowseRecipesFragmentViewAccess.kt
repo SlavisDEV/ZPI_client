@@ -6,4 +6,8 @@
 package io.slavisdev.zpi.ui.main.browse_recipes
 
 interface BrowseRecipesFragmentViewAccess {
+
+    fun showLoadingScreen()
+
+    fun hideLoadingScreen()
 }

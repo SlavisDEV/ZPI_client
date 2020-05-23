@@ -34,7 +34,7 @@ class FavouriteRecipesFragment : Fragment(), FavouriteRecipesFragmentViewAccess 
         savedInstanceState: Bundle?
     ): View? {
 
-        App.get(activity!!)
+        App.get(requireActivity())
             .getAppComponent()
             .plus(FavouriteRecipesFragmentModule(this))
             .inject(this)

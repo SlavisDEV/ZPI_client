@@ -22,12 +22,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/modal_top_background">
+            app:cardBackgroundColor="@color/white"
+            app:shapeAppearance="@style/CardViewTop">
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
                 android:id="@+id/textView"
                 style="@style/TextSubtitle"
                 android:layout_width="wrap_content"
@@ -40,37 +45,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_32"
-                android:layout_marginStart="@dimen/margin_24"
-                android:layout_marginTop="@dimen/margin_16"
-                android:layout_marginEnd="@dimen/margin_24"
-                android:layout_marginBottom="@dimen/margin_24"
-                android:background="@drawable/input_background"
-                android:ems="10"
-                android:inputType="text"
-                android:paddingStart="@dimen/margin_16"
-                android:paddingEnd="@dimen/margin_64"
-                android:text="@string/i_do_not_like"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <AutoCompleteTextView
+                    android:id="@+id/avoidIngredientsInput"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/margin_32"
+                    android:layout_marginStart="@dimen/margin_24"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_24"
+                    android:layout_marginBottom="@dimen/margin_24"
+                    android:background="@drawable/input_background"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/margin_16"
+                    android:paddingEnd="@dimen/margin_64"
+                    android:hint="@string/i_do_not_like"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="@dimen/margin_48"
-                android:layout_height="0dp"
-                android:background="@drawable/input_button"
-                app:layout_constraintBottom_toBottomOf="@+id/editText"
-                app:layout_constraintEnd_toEndOf="@+id/editText"
-                app:layout_constraintTop_toTopOf="@+id/editText"
-                app:srcCompat="@drawable/ic_search" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="@dimen/margin_48"
+                    android:layout_height="0dp"
+                    android:background="@drawable/input_button"
+                    app:layout_constraintBottom_toBottomOf="@+id/avoidIngredientsInput"
+                    app:layout_constraintEnd_toEndOf="@+id/avoidIngredientsInput"
+                    app:layout_constraintTop_toTopOf="@+id/avoidIngredientsInput"
+                    app:srcCompat="@drawable/ic_search" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/textView2"
@@ -82,25 +91,33 @@
             android:layout_marginBottom="@dimen/margin_8"
             android:text="@string/avoid_ingredients" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/modal_fullscreen_background"
-            android:minHeight="120dp">
+            app:cardBackgroundColor="@color/white"
+            app:shapeAppearance="@style/CardViewFull">
 
-            <me.gujun.android.taggroup.TagGroup
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:minHeight="48dp">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <me.gujun.android.taggroup.TagGroup
+                    android:id="@+id/ingredientsTags"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/textView3"
@@ -112,27 +129,33 @@
             android:layout_marginTop="@dimen/margin_24"
             android:layout_marginBottom="@dimen/margin_8"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/modal_fullscreen_background">
+            app:cardBackgroundColor="@color/white"
+            app:shapeAppearance="@style/CardViewFull">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_recipe" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_recipe" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </layout>

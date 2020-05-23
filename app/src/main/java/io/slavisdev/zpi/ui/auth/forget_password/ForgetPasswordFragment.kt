@@ -35,7 +35,7 @@ class ForgetPasswordFragment : ScopedFragment(), ForgetPasswordFragmentViewAcces
         savedInstanceState: Bundle?
     ): View? {
 
-        App.get(activity!!)
+        App.get(requireActivity())
             .getAppComponent()
             .plus(ForgetPasswordFragmentModule(this))
             .inject(this)

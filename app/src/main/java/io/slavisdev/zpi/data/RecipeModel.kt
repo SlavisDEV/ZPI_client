@@ -6,6 +6,7 @@
 package io.slavisdev.zpi.data
 
 class RecipeModel(
+    val id: Int,
     val title: String?,
     val description: String?,
     val preparationTime: String?,

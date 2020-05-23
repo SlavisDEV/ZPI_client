@@ -34,7 +34,7 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="124dp"
+            android:layout_width="136dp"
             android:layout_height="85dp"
             android:layout_marginTop="@dimen/margin_16"
             android:background="@drawable/rounded_corners"
@@ -43,9 +43,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             style="@style/ButtonOutline"
+            app:cornerRadius="12dp"
             android:layout_width="0dp"
             android:layout_height="@dimen/margin_32"
             android:layout_marginTop="@dimen/margin_8"

@@ -6,4 +6,10 @@
 package io.slavisdev.zpi.ui.main.your_menu
 
 interface YourMenuFragmentViewAccess {
+
+    fun showLoadingScreen()
+
+    fun hideLoadingScreen()
+
+    fun addIngredientToTags(ingredientName: String)
 }

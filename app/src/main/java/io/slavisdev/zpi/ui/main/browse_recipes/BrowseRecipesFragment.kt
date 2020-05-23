@@ -21,6 +21,7 @@ import io.slavisdev.zpi.di.base.App
 import io.slavisdev.zpi.di.ui.main.browse_recipes.BrowseRecipesFragmentModule
 import io.slavisdev.zpi.navigation.Navigation
 import io.slavisdev.zpi.ui.base.ScopedFragment
+import io.slavisdev.zpi.ui.main.MainActivity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,7 +40,7 @@ class BrowseRecipesFragment : ScopedFragment(), BrowseRecipesFragmentViewAccess 
         savedInstanceState: Bundle?
     ): View? {
 
-        App.get(activity!!)
+        App.get(requireActivity())
             .getAppComponent()
             .plus(BrowseRecipesFragmentModule(this))
             .inject(this)
@@ -93,5 +94,13 @@ class BrowseRecipesFragment : ScopedFragment(), BrowseRecipesFragmentViewAccess 
             val adapter = RecipesAdapter(recipes, model)
             binding.recipesRecyclerView.adapter = adapter
         })
+    }
+
+    override fun showLoadingScreen() {
+        (activity as MainActivity).showLoadingScreen()
+    }
+
+    override fun hideLoadingScreen() {
+        (activity as MainActivity).hideLoadingScreen()
     }
 }

@@ -22,6 +22,9 @@ import javax.inject.Inject
 class BrowseRecipesFragmentViewModel @Inject constructor() {
 
     @Inject
+    protected lateinit var viewAccess: BrowseRecipesFragmentViewAccess
+
+    @Inject
     protected lateinit var apolloClient: ApolloClient
 
     @Inject
@@ -41,12 +44,8 @@ class BrowseRecipesFragmentViewModel @Inject constructor() {
     val recipes: LiveData<List<RecipeModel>>
         get() = _recipes
 
-    private val _executeRequest = MutableLiveData<Boolean>()
-    val executeRequest: LiveData<Boolean>
-        get() = _executeRequest
-
     fun setup() {
-        _executeRequest.value = true
+        viewAccess.showLoadingScreen()
         CoroutineScope(Dispatchers.IO).launch {
             val apolloResponse = fetchRecipes()
 
@@ -57,6 +56,7 @@ class BrowseRecipesFragmentViewModel @Inject constructor() {
             } else {
                 _recipes.postValue(apolloResponse.allRecipes()?.map {
                     RecipeModel(
+                        it.id().toInt(),
                         it.title() ?: context.getString(R.string.unknown),
                         it.description() ?: context.getString(R.string.unknown),
                         it.preparationTime()?.toString() ?: context.getString(R.string.unknown),
@@ -65,8 +65,7 @@ class BrowseRecipesFragmentViewModel @Inject constructor() {
                     )
                 })
 
-                delay(1500)
-                _executeRequest.postValue(false)
+                viewAccess.hideLoadingScreen()
             }
         }
     }
@@ -74,7 +73,7 @@ class BrowseRecipesFragmentViewModel @Inject constructor() {
     private suspend fun fetchRecipes() : RecipesQuery.Data? {
         return withContext(Dispatchers.IO) {
             try {
-                apolloClient.query(RecipesQuery()).toDeferred().await().data
+                apolloClient.query(RecipesQuery.builder().build()).toDeferred().await().data
             } catch (throwable: Throwable) {
                 null
             }

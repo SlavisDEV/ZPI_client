@@ -38,7 +38,7 @@ class LoginFragment : ScopedFragment(), LoginFragmentViewAccess {
         savedInstanceState: Bundle?
     ): View? {
 
-        App.get(activity!!)
+        App.get(requireActivity())
             .getAppComponent()
             .plus(LoginFragmentModule(this))
             .inject(this)
@@ -84,8 +84,8 @@ class LoginFragment : ScopedFragment(), LoginFragmentViewAccess {
     }
 
     override fun showMainActivity() {
-        navigation.startMainActivity(activity!!)
-        activity!!.finish()
+        navigation.startMainActivity(requireActivity())
+        requireActivity().finish()
     }
 
 }

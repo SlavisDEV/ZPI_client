@@ -34,7 +34,7 @@ class RegisterFragment : ScopedFragment(), RegisterFragmentViewAccess {
         savedInstanceState: Bundle?
     ): View? {
 
-        App.get(activity!!)
+        App.get(requireActivity())
             .getAppComponent()
             .plus(RegisterFragmentModule(this))
             .inject(this)
@@ -64,8 +64,12 @@ class RegisterFragment : ScopedFragment(), RegisterFragmentViewAccess {
             if (it == true) {
                 val title = model.infoTitle.value ?: return@Observer
                 val message = model.infoMessage.value ?: return@Observer
+                val closeScreen = model.closeScreen.value ?: false
                 showInfoModal(title, message) {
                     model.clearFields()
+                    if (closeScreen) {
+                        activity?.onBackPressed()
+                    }
                 }
             }
         })
