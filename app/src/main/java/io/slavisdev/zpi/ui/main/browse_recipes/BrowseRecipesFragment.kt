@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import io.slavisdev.zpi.R
@@ -102,5 +103,11 @@ class BrowseRecipesFragment : ScopedFragment(), BrowseRecipesFragmentViewAccess 
 
     override fun hideLoadingScreen() {
         (activity as MainActivity).hideLoadingScreen()
+    }
+
+    override fun onRecipeClicked(recipeId: Int) {
+        val action = BrowseRecipesFragmentDirections
+            .actionMainMenuBrowseRecipesToRecipeFragment(recipeId)
+        findNavController().navigate(action)
     }
 }

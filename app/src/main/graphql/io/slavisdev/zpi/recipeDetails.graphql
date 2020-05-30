@@ -1,0 +1,14 @@
+query RecipeDetails($id: Int) {
+    recipe(id: $id) {
+        title,
+        description,
+        preparationTime,
+        servings,
+        imageSet {
+            url
+        },
+        ingredients {
+            name
+        }
+    }
+}

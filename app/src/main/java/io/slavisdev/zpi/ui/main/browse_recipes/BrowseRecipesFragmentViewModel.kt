@@ -79,4 +79,8 @@ class BrowseRecipesFragmentViewModel @Inject constructor() {
             }
         }
     }
+
+    fun onRecipeClicked(recipeId: Int) {
+        viewAccess.onRecipeClicked(recipeId)
+    }
 }

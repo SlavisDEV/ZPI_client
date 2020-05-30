@@ -10,4 +10,6 @@ interface BrowseRecipesFragmentViewAccess {
     fun showLoadingScreen()
 
     fun hideLoadingScreen()
+
+    fun onRecipeClicked(recipeId: Int)
 }

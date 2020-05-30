@@ -15,6 +15,8 @@ import io.slavisdev.zpi.di.ui.main.favourite_recipes.FavouriteRecipesFragmentCom
 import io.slavisdev.zpi.di.ui.main.favourite_recipes.FavouriteRecipesFragmentModule
 import io.slavisdev.zpi.di.ui.main.your_menu.YourMenuFragmentComponent
 import io.slavisdev.zpi.di.ui.main.your_menu.YourMenuFragmentModule
+import io.slavisdev.zpi.di.ui.recipe.RecipeFragmentComponent
+import io.slavisdev.zpi.di.ui.recipe.RecipeFragmentModule
 import io.slavisdev.zpi.di.ui.splash_screen.SplashScreenActivityModule
 import io.slavisdev.zpi.di.ui.splash_screen.SplashScreenActivityComponent
 import javax.inject.Singleton
@@ -45,4 +47,6 @@ interface AppComponent {
     fun plus(module: FavouriteRecipesFragmentModule): FavouriteRecipesFragmentComponent
 
     fun plus(module: BrowseRecipesFragmentModule): BrowseRecipesFragmentComponent
+
+    fun plus(module: RecipeFragmentModule): RecipeFragmentComponent
 }

@@ -27,6 +27,8 @@
     <string name="your_menu_title">Hello! What do you want to eat?</string>
     <string name="i_do_not_like">I do not like…</string>
     <string name="avoid_ingredients">Avoid these ingredients</string>
+    <string name="description_title">Description</string>
+    <string name="ingredients_title">Ingredients</string>
     <string name="your_menu_upper">Your menu</string>
     <string name="unknown">Unknown</string>
 </resources>
