@@ -31,4 +31,5 @@
     <string name="ingredients_title">Ingredients</string>
     <string name="your_menu_upper">Your menu</string>
     <string name="unknown">Unknown</string>
+    <string name="recipe_mark_as_favourite">Recipe has been marked as favourite</string>
 </resources>

@@ -10,7 +10,9 @@ import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.toDeferred
 import io.slavisdev.zpi.AllIngredientsQuery
+import io.slavisdev.zpi.AvoidIngredientMutation
 import io.slavisdev.zpi.R
+import io.slavisdev.zpi.settings.AppSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +27,9 @@ class YourMenuFragmentViewModel @Inject constructor() {
     @Inject
     protected lateinit var apolloClient: ApolloClient
 
+    @Inject
+    protected lateinit var appSettings: AppSettings
+
     private val _infoTitle = MutableLiveData<Int>()
     val infoTitle: LiveData<Int>
         get() = _infoTitle
@@ -38,6 +43,9 @@ class YourMenuFragmentViewModel @Inject constructor() {
     private val _ingredients = MutableLiveData<List<AllIngredientsQuery.AllIngredient>>()
     val ingredients: LiveData<List<AllIngredientsQuery.AllIngredient>>
         get() = _ingredients
+    private val _avoidIngredients = MutableLiveData<List<String>>()
+    val avoidIngredients: LiveData<List<String>>
+        get() = _avoidIngredients
 
     fun setup() {
         viewAccess.showLoadingScreen()
@@ -66,11 +74,26 @@ class YourMenuFragmentViewModel @Inject constructor() {
     }
 
     fun addIngredient(ingredient: AllIngredientsQuery.AllIngredient) {
-        // todo send to api
-        viewAccess.addIngredientToTags(ingredient.name())
+        CoroutineScope(Dispatchers.IO).launch {
+            if (sendIngredientToApi(ingredient.id().toInt())) {
+                _avoidIngredients.postValue((_avoidIngredients.value ?: listOf()).plus(ingredient.name()))
+            }
+        }
     }
 
-    private fun sendIngredientToApi() {
-
+    private suspend fun sendIngredientToApi(ingredientId: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val mutation = AvoidIngredientMutation
+                    .builder()
+                    .ingredientId(ingredientId)
+                    .userId(appSettings.getUserId())
+                    .build()
+                apolloClient.mutate(mutation).toDeferred().await()
+                    .data?.addDislikedIngredient()?.ok() == true
+            } catch (throwable: Throwable) {
+                false
+            }
+        }
     }
 }

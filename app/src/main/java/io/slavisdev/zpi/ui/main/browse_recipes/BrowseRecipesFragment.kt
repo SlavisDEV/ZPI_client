@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import io.slavisdev.zpi.R
 import io.slavisdev.zpi.adapter.RecipesAdapter
@@ -26,6 +27,8 @@ import io.slavisdev.zpi.ui.main.MainActivity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val RECIPES_VISIBLE_THRESHOLD = 5
+
 class BrowseRecipesFragment : ScopedFragment(), BrowseRecipesFragmentViewAccess {
 
     @Inject
@@ -35,6 +38,8 @@ class BrowseRecipesFragment : ScopedFragment(), BrowseRecipesFragmentViewAccess 
     protected lateinit var navigation: Navigation
 
     private lateinit var binding: FragmentBrowseRecipesBinding
+
+    private var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,6 +91,19 @@ class BrowseRecipesFragment : ScopedFragment(), BrowseRecipesFragmentViewAccess 
                 LinearLayoutManager.VERTICAL,
                 false
             )
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val totalItemCount = (layoutManager as LinearLayoutManager).itemCount
+                    val lastVisibleItem = (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+
+                    if (!isLoading && lastVisibleItem == totalItemCount - RECIPES_VISIBLE_THRESHOLD) {
+                        isLoading = true
+                        model.loadMoreRecipes()
+                    }
+                }
+            })
         }
 
         model.recipes.observe(this@BrowseRecipesFragment, Observer {
@@ -94,6 +112,7 @@ class BrowseRecipesFragment : ScopedFragment(), BrowseRecipesFragmentViewAccess 
             val recipes = it
             val adapter = RecipesAdapter(recipes, model)
             binding.recipesRecyclerView.adapter = adapter
+            isLoading = false
         })
     }
 

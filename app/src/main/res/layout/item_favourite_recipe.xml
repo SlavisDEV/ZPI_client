@@ -14,7 +14,7 @@
             type="io.slavisdev.zpi.data.RecipeModel"/>
         <variable
             name="access"
-            type="io.slavisdev.zpi.ui.main.browse_recipes.BrowseRecipesFragmentViewModel" />
+            type="io.slavisdev.zpi.ui.main.favourite_recipes.FavouriteRecipesFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,32 +36,14 @@
 
         <ImageView
             android:id="@+id/imageView"
+            imageFromUri="@{obj.imageUrl}"
             android:layout_width="136dp"
             android:layout_height="85dp"
             android:layout_marginTop="@dimen/margin_16"
             android:background="@drawable/rounded_corners"
             android:src="@drawable/ic_logo"
-            imageFromUri="@{obj.imageUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
-            style="@style/ButtonOutline"
-            app:cornerRadius="12dp"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/margin_32"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginBottom="@dimen/margin_24"
-            android:drawableEnd="@drawable/ic_heart"
-            android:drawableTint="@color/white"
-            android:paddingEnd="@dimen/margin_8"
-            android:text="@string/favourite"
-            android:onClick="@{() -> access.markAsFavourite(obj)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/textView7"
@@ -79,9 +61,11 @@
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toTopOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:srcCompat="@drawable/ic_user" />
 
         <TextView

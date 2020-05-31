@@ -62,6 +62,7 @@ class YourMenuFragment : ScopedFragment(), YourMenuFragmentViewAccess {
 
         bindInfoUI()
         bindAutoCompleteTextView()
+        bindAvoidIngredients()
 
         return binding.root
     }
@@ -112,11 +113,11 @@ class YourMenuFragment : ScopedFragment(), YourMenuFragmentViewAccess {
         (activity as MainActivity).hideLoadingScreen()
     }
 
-    override fun addIngredientToTags(ingredientName: String) {
-        val currentTags = binding.ingredientsTags.tags
-        val newTags = currentTags.toMutableList().apply {
-            add(ingredientName)
-        }
-        binding.ingredientsTags.setTags(newTags)
+    private fun bindAvoidIngredients() = launch {
+        model.avoidIngredients.observe(this@YourMenuFragment, Observer {
+            if (it == null) return@Observer
+
+            binding.ingredientsTags.setTags(it)
+        })
     }
 }

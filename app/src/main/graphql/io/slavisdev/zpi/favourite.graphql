@@ -1,0 +1,11 @@
+mutation AddFavouriteRecipe($userId: Int, $recipeId: Int) {
+    saveUserRecipe(userId: $userId, recipeId: $recipeId) {
+        ok
+    }
+}
+
+mutation RemoveFavouriteRecipe($userId: Int, $recipeId: Int) {
+    removeUserRecipe(userId: $userId, recipeId: $recipeId) {
+        ok
+    }
+}

@@ -78,7 +78,7 @@ class RecipeFragmentViewModel @Inject constructor() {
 
             _title.postValue(recipe.recipe()?.title())
             _description.postValue(recipe.recipe()?.description())
-            _imageUrl.postValue(recipe.recipe()?.imageSet()?.firstOrNull()?.url())
+            _imageUrl.postValue(recipe.recipe()?.image()?.url())
             _servings.postValue(recipe.recipe()?.servings())
             _preparationTime.postValue(recipe.recipe()?.preparationTime()?.toString())
             _ingredients.postValue(recipe.recipe()?.ingredients()?.map {

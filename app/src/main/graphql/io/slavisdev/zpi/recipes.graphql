@@ -1,12 +1,42 @@
-query RecipesQuery {
-    allRecipes {
+query RecipesQuery($alreadyHave: Int) {
+    allRecipes(first: 25, offset: $alreadyHave) {
         id,
         title,
-        imageSet {
+        image {
             url
         },
         description,
         preparationTime,
         servings
+    }
+}
+
+query RecipeDetails($id: Int) {
+    recipe(id: $id) {
+        title,
+        description,
+        preparationTime,
+        servings,
+        image {
+            url
+        },
+        ingredients {
+            name
+        }
+    }
+}
+
+query FavouriteRecipes($userId: Int) {
+    user(id: $userId) {
+        savedRecipes {
+            id,
+            title,
+            image {
+                url
+            },
+            description,
+            preparationTime,
+            servings
+        }
     }
 }

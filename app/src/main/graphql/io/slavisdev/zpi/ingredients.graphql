@@ -4,3 +4,9 @@ query AllIngredients {
         name
     }
 }
+
+mutation AvoidIngredient($userId: Int, $ingredientId: Int) {
+    addDislikedIngredient(userId: $userId, ingredientId: $ingredientId) {
+        ok
+    }
+}

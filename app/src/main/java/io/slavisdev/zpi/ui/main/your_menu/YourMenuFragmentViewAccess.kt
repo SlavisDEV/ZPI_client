@@ -10,6 +10,4 @@ interface YourMenuFragmentViewAccess {
     fun showLoadingScreen()
 
     fun hideLoadingScreen()
-
-    fun addIngredientToTags(ingredientName: String)
 }

@@ -19,6 +19,15 @@ fun changeViewVisibility(view: View, bool: Boolean) {
     }
 }
 
+@BindingAdapter("invisibleIf")
+fun hideView(view: View, bool: Boolean) {
+    if (bool) {
+        view.visibility = View.INVISIBLE
+    } else {
+        view.visibility = View.VISIBLE
+    }
+}
+
 @BindingAdapter("imageFromResource")
 fun setImageFromResource(view: ImageView, resource: Int) {
     view.setImageResource(resource)
