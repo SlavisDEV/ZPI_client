@@ -9,8 +9,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.toDeferred
+import io.slavisdev.zpi.AddFavouriteRecipeMutation
 import io.slavisdev.zpi.R
 import io.slavisdev.zpi.RecipeDetailsQuery
+import io.slavisdev.zpi.data.RecipeModel
+import io.slavisdev.zpi.settings.AppSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,9 +28,9 @@ class RecipeFragmentViewModel @Inject constructor() {
     @Inject
     protected lateinit var apolloClient: ApolloClient
 
-    private val _executeRequest = MutableLiveData<Boolean>()
-    val executeRequest: LiveData<Boolean>
-        get() = _executeRequest
+    @Inject
+    protected lateinit var appSettings: AppSettings
+
     private val _infoTitle = MutableLiveData<Int>()
     val infoTitle: LiveData<Int>
         get() = _infoTitle
@@ -56,6 +59,11 @@ class RecipeFragmentViewModel @Inject constructor() {
     private val _ingredients = MutableLiveData<List<String>>()
     val ingredients: LiveData<List<String>>
         get() = _ingredients
+    private val _methods = MutableLiveData<List<String>>()
+    val methods: LiveData<List<String>>
+        get() = _methods
+
+    private var recipeId: Int = -1
 
     fun setup(recipeId: Int?) {
 
@@ -76,14 +84,27 @@ class RecipeFragmentViewModel @Inject constructor() {
                 return@launch
             }
 
+            this@RecipeFragmentViewModel.recipeId = recipeId
             _title.postValue(recipe.recipe()?.title())
             _description.postValue(recipe.recipe()?.description())
             _imageUrl.postValue(recipe.recipe()?.image()?.url())
             _servings.postValue(recipe.recipe()?.servings())
             _preparationTime.postValue(recipe.recipe()?.preparationTime()?.toString())
-            _ingredients.postValue(recipe.recipe()?.ingredients()?.map {
-                it.name()
-            })
+
+            val ingredients = arrayListOf<String>()
+            recipe.recipe()?.ingredientssegmentSet()?.forEach {
+                ingredients.addAll(
+                    it.mealingredientSet().map { ingredient ->
+                        ingredient.ingredientAndAmountText()
+                    }
+                )
+            }
+            _ingredients.postValue(ingredients)
+
+            val methods = recipe.recipe()?.preparationstepSet()?.map {
+                it.stepText()
+            }
+            _methods.postValue(methods)
 
             viewAccess.hideLoadingScreen()
         }
@@ -99,6 +120,34 @@ class RecipeFragmentViewModel @Inject constructor() {
                 apolloClient.query(query).toDeferred().await().data
             } catch (throwable: Throwable) {
                 null
+            }
+        }
+    }
+
+    fun markAsFavourite() {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (sendFavouriteRecipeToApi(recipeId)) {
+                _infoTitle.postValue(R.string.success)
+                _infoMessage.postValue(R.string.recipe_mark_as_favourite)
+            } else {
+                _infoTitle.postValue(R.string.error)
+                _infoMessage.postValue(R.string.api_error)
+            }
+            _showInfoModal.postValue(true)
+        }
+    }
+
+    private suspend fun sendFavouriteRecipeToApi(recipeId: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val mutation = AddFavouriteRecipeMutation.builder()
+                    .recipeId(recipeId)
+                    .userId(appSettings.getUserId())
+                    .build()
+                apolloClient.mutate(mutation).toDeferred().await().data
+                    ?.saveUserRecipe()?.ok() == true
+            } catch (throwable: Throwable) {
+                false
             }
         }
     }

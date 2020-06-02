@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import io.slavisdev.zpi.R
 import io.slavisdev.zpi.adapter.IngredientsAdapter
+import io.slavisdev.zpi.adapter.MethodAdapter
 import io.slavisdev.zpi.databinding.FragmentRecipeBinding
 import io.slavisdev.zpi.di.base.App
 import io.slavisdev.zpi.di.ui.recipe.RecipeFragmentModule
@@ -56,6 +57,7 @@ class RecipeFragment : ScopedFragment(), RecipeFragmentViewAccess {
         model.setup(safeArgs?.recipeId)
 
         bindIngredientsUI()
+        bindMethodsUI()
         bindInfoUI()
 
         return binding.root
@@ -75,6 +77,23 @@ class RecipeFragment : ScopedFragment(), RecipeFragmentViewAccess {
 
             val adapter = IngredientsAdapter(it)
             binding.ingredients.adapter = adapter
+        })
+    }
+
+    private fun bindMethodsUI() = launch {
+        binding.method.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+        }
+
+        model.methods.observe(this@RecipeFragment, Observer {
+            if (it == null) return@Observer
+
+            val adapter = MethodAdapter(it)
+            binding.method.adapter = adapter
         })
     }
 

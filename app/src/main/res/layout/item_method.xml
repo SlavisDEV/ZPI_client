@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_check" />
+            app:srcCompat="@drawable/ic_dot" />
 
         <TextView
             style="@style/TextRegularSmall"
@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="@+id/imageView4"
-            tools:text="asdsa das dasd sa dsa dasd asdas das asd asasdsa das dasd sa dsa dasd asdas das asd asasdsa das dasd sa dsa dasd asdas das asd as" />
+            tools:text="asda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das d" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

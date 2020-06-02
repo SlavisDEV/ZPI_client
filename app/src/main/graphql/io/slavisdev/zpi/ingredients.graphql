@@ -10,3 +10,9 @@ mutation AvoidIngredient($userId: Int, $ingredientId: Int) {
         ok
     }
 }
+
+mutation RemoveFromAvoidIngredient($userId: Int, $ingredientId: Int) {
+    removeDislikedIngredient(userId: $userId, ingredientId: $ingredientId) {
+        ok
+    }
+}

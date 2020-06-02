@@ -10,9 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.toDeferred
-import io.slavisdev.zpi.FavouriteRecipesQuery
-import io.slavisdev.zpi.R
-import io.slavisdev.zpi.RecipesQuery
+import io.slavisdev.zpi.*
 import io.slavisdev.zpi.data.RecipeModel
 import io.slavisdev.zpi.settings.AppSettings
 import kotlinx.coroutines.CoroutineScope
@@ -84,6 +82,38 @@ class FavouriteRecipesFragmentViewModel @Inject constructor() {
                 apolloClient.query(query).toDeferred().await().data
             } catch (throwable: Throwable) {
                 null
+            }
+        }
+    }
+
+    fun removeFromFavourites(recipe: RecipeModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (sendRemoveFromFavouriteToApi(recipe.id)) {
+                _infoTitle.postValue(R.string.success)
+                _infoMessage.postValue(R.string.recipe_removed_from_favourites)
+            } else {
+                _infoTitle.postValue(R.string.error)
+                _infoMessage.postValue(R.string.api_error)
+            }
+            _showInfoModal.postValue(true)
+            val newRecipes = ArrayList(_recipes.value ?: listOf()).apply {
+                remove(recipe)
+            }
+            _recipes.postValue(newRecipes)
+        }
+    }
+
+    private suspend fun sendRemoveFromFavouriteToApi(recipeId: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val mutation = RemoveFavouriteRecipeMutation.builder()
+                    .recipeId(recipeId)
+                    .userId(appSettings.getUserId())
+                    .build()
+                apolloClient.mutate(mutation).toDeferred().await().data
+                    ?.removeUserRecipe()?.ok() == true
+            } catch (throwable: Throwable) {
+                false
             }
         }
     }

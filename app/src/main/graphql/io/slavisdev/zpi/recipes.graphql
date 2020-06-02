@@ -13,6 +13,7 @@ query RecipesQuery($alreadyHave: Int) {
 
 query RecipeDetails($id: Int) {
     recipe(id: $id) {
+        id,
         title,
         description,
         preparationTime,
@@ -20,8 +21,13 @@ query RecipeDetails($id: Int) {
         image {
             url
         },
-        ingredients {
-            name
+        ingredientssegmentSet {
+            mealingredientSet {
+                ingredientAndAmountText
+            }
+        },
+        preparationstepSet {
+            stepText
         }
     }
 }
@@ -38,5 +44,18 @@ query FavouriteRecipes($userId: Int) {
             preparationTime,
             servings
         }
+    }
+}
+
+query RecipesByIngredients($alreadyHave: Int, $avoidIngredients: [Int]) {
+    allRecipes(first: 25, offset: $alreadyHave, dislikedIngredientsIds: $avoidIngredients) {
+        id,
+        title,
+        image {
+            url
+        },
+        description,
+        preparationTime,
+        servings
     }
 }

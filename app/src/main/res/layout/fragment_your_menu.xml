@@ -110,6 +110,13 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="10dp"
+                    app:atg_verticalSpacing="@dimen/margin_8"
+                    app:atg_horizontalPadding="@dimen/margin_8"
+                    app:atg_backgroundColor="@color/colorPrimary"
+                    app:atg_borderColor="@color/colorPrimary"
+                    app:atg_textColor="@color/white"
+                    app:atg_textSize="@dimen/text_14"
+                    app:atg_pressedBackgroundColor="@color/colorPrimaryDark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -141,6 +148,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recipesRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="16dp"
