@@ -1,0 +1,8 @@
+query UserIngredients($userId: Int) {
+    user(id: $userId) {
+        dislikedIngredients {
+            id,
+            name
+        }
+    }
+}

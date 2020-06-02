@@ -1,0 +1,61 @@
+query RecipesQuery($alreadyHave: Int) {
+    allRecipes(first: 25, offset: $alreadyHave) {
+        id,
+        title,
+        image {
+            url
+        },
+        description,
+        preparationTime,
+        servings
+    }
+}
+
+query RecipeDetails($id: Int) {
+    recipe(id: $id) {
+        id,
+        title,
+        description,
+        preparationTime,
+        servings,
+        image {
+            url
+        },
+        ingredientssegmentSet {
+            mealingredientSet {
+                ingredientAndAmountText
+            }
+        },
+        preparationstepSet {
+            stepText
+        }
+    }
+}
+
+query FavouriteRecipes($userId: Int) {
+    user(id: $userId) {
+        savedRecipes {
+            id,
+            title,
+            image {
+                url
+            },
+            description,
+            preparationTime,
+            servings
+        }
+    }
+}
+
+query RecipesByIngredients($alreadyHave: Int, $avoidIngredients: [Int]) {
+    allRecipes(first: 25, offset: $alreadyHave, dislikedIngredientsIds: $avoidIngredients) {
+        id,
+        title,
+        image {
+            url
+        },
+        description,
+        preparationTime,
+        servings
+    }
+}

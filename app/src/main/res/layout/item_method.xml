@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Sławomir Przybylski
+  ~ 26/05/20 10:23
+  -->
+
+<!--
+  ~ Created by Sławomir Przybylski
+  ~ 09/05/20 20:15
+  -->
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="obj"
+            type="String"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_dot" />
+
+        <TextView
+            style="@style/TextRegularSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@{obj}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            tools:text="asda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das dasda sdsa dasd asd asd sad asds adsa das d" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

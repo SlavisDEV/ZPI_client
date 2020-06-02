@@ -1,0 +1,12 @@
+{
+  "name": "ZPI Backend schema",
+  "schemaPath": "schema.json",
+  "extensions": {
+    "endpoints": {
+      "Remote GraphQL Endpoint": {
+        "url": "http://40.87.104.186/graphql",
+        "introspect": true
+      }
+    }
+  }
+}

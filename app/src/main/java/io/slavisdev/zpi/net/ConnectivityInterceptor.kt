@@ -1,3 +1,8 @@
+/*
+ * Created by Sławomir Przybylski
+ * 16/05/20 22:49
+ */
+
 package io.slavisdev.zpi.net
 
 import android.content.Context
@@ -18,7 +23,6 @@ class ConnectivityInterceptor(context: Context) : Interceptor {
         return chain.proceed(chain.request())
     }
 
-    @Suppress("DEPRECATION")
     private fun isOnline(): Boolean {
         val connectivityManager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE)
                 as ConnectivityManager

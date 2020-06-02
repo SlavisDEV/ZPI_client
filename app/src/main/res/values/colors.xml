@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#89C947</color>
+    <color name="colorPrimaryDark">#368C0E</color>
+    <color name="colorAccent">#046699</color>
+    <color name="background">#E0E0E0</color>
+    <color name="colorTextHint">#DEDEDE</color>
+    <color name="textColor">#707070</color>
+    <color name="white">#FFFFFF</color>
+    <color name="progressBackground">#88000000</color>
 </resources>

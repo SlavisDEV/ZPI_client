@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Sławomir Przybylski
+  ~ 21/04/20 13:08
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
+    app:startDestination="@id/main_menu_your_menu">
+
+    <fragment
+        android:id="@+id/main_menu_your_menu"
+        android:name="io.slavisdev.zpi.ui.main.your_menu.YourMenuFragment"
+        android:label="YourMenuFragment" >
+        <action
+            android:id="@+id/action_main_menu_your_menu_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/main_menu_browse_recipes"
+        android:name="io.slavisdev.zpi.ui.main.browse_recipes.BrowseRecipesFragment"
+        android:label="BrowseRecipesFragment" >
+        <action
+            android:id="@+id/action_main_menu_browse_recipes_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/main_menu_favourite_recipes"
+        android:name="io.slavisdev.zpi.ui.main.favourite_recipes.FavouriteRecipesFragment"
+        android:label="FavouriteRecipesFragment" >
+        <action
+            android:id="@+id/action_main_menu_favourite_recipes_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeFragment"
+        android:name="io.slavisdev.zpi.ui.recpie.RecipeFragment"
+        android:label="RecipeFragment" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
+</navigation>
